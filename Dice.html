@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Dice Game -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dice Game</title>
+
+    <!-- CSS Code Starts here -->
+    <style>
+      #dices {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .container {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+      }
+
+      .dice {
+        color: #4ecca3;
+        text-align: center;
+        display: inline-block;
+        margin: 10px;
+      }
+      body {
+        background-color: #000036;
+        margin: 0;
+      }
+      h1 {
+        margin: 30px;
+        font-family: "Lobster", cursive;
+        text-shadow: 5px 0 #232931;
+        font-size: 4.5rem;
+        color: #4ecca3;
+        text-align: center;
+      }
+      p {
+        font-size: 2rem;
+        color: #4ecca3;
+        font-family: "Indie FLower", cursive;
+      }
+      img {
+        width: 100%;
+      }
+      .bottom {
+        padding-top: 30px;
+      }
+
+     /* button:disabled,
+button[disabled]{
+  
+  background-color: #332f2f;
+  color: #666666;
+}
+*/
+      .butn {
+        background: #4ecca3;
+        font-family: "Indie FLower", cursive;
+        border-radius: 7px;
+        color: #ffff;
+        font-size: 20px;
+        width: 150px;
+        text-decoration: none;
+        height: 60px;
+      }
+      .butn:hover {
+        background: #232931;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <!-- Body of the Dice Game -->
+  <body>
+    <div class="container">
+      <h1>Hello Guys, Let's Play the Dice Game!</h1>
+
+      <div id="dices">
+        <div class="dice" style="display: flex; flex-direction: column;align-items: flex-start; width: 200px;">
+          <p class="Player1" >
+            Player 1 <br />
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; width: 65%;">
+                <h4>Current score :  </h4>
+                <label id="c0">0</label>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; width: 65%;">
+                <h4>Total score :  </h4>
+                <label id="t0">0</label>
+            </div>
+
+            <div style="margin-top:20px ;" >
+                <button type="button" class="butn" onClick="rollTheDice(this)" id="p0">
+                   Roll The Dice
+                </button>
+              </div>
+              <div style="margin-top:20px ;" >
+                <button type="button" class="butn" onClick="rollTheDice(this)" id="h0" >
+                   Hold
+                </button>
+              </div>
+         
+         
+
+          </p>
+         
+
+          
+        </div>
+
+        <div id="dices">
+            <div class="dice" style="display: flex; flex-direction: column;align-items: flex-start; width: 200px;">
+              <p class="Player1" >
+                Player 2 <br />
+                
+                <div style="display: flex; align-items: center; justify-content: space-between; width: 65%;">
+                    <h4>Current score :  </h4>
+                    <label id="c1">0</label>
+                </div>
+    
+                <div style="display: flex; align-items: center; justify-content: space-between; width: 65%;">
+                    <h4>Total score :  </h4>
+                    <label id="t1">0</label>
+                </div>
+                <div style="margin-top:20px ;" >
+                    <button type="button" class="butn" onClick="rollTheDice(this) " id="p1">
+                       Roll The Dice
+                    </button>
+                  </div>
+                  <div style="margin-top:20px ;" >
+                    <button type="button" class="butn" onClick="rollTheDice(this)" id="h1">
+                       Hold
+                    </button>
+                  </div>
+    
+             
+    
+              </p>
+              
+    
+              
+            </div>
+      </div>
+    </div>
+
+    <div class="container bottom">
+      <img src="./dice1.png" alt="" style="width: 100px;" class="img1">
+    </div>
+   
+    <!-- JavaScript Code starts here -->
+    <script>
+    
+
+      let total1=0;
+      let total2=0;
+      
+      
+
+     
+
+      function rollTheDice(element) {
+        setTimeout(function () {
+            let num= element.getAttribute("id")[1];
+
+          
+         
+
+            if(element.getAttribute("id")[0]=='h'){
+                
+                document.getElementById("c"+num).innerHTML=0;
+                document.querySelector('#p'+num).disabled = true;
+                document.querySelector('#h'+num).disabled = true;
+                document.querySelector('#p'+(num^1)).disabled = false;
+                document.querySelector('#h'+(num^1)).disabled = false;
+
+               
+                return;
+
+            }
+          var random = Math.floor(Math.random() * 6) + 1;
+          document
+            .querySelector(".img1")
+            .setAttribute("src", "dice" + random + ".png");
+        
+
+            if(random!=1){
+
+                if(num==0){
+
+                    total1+=random;
+                }else{
+                    total2+=random;
+
+                }
+               
+
+            }else
+
+            {
+                document.getElementById("c"+num).innerHTML=0;
+                document.getElementById("t"+num).innerHTML=0;
+                document.querySelector('#p'+num).disabled = true;
+                document.querySelector('#p'+num).
+                document.querySelector('#h'+num).disabled = true;
+
+               
+                document.querySelector('#p'+((num ^ 1))).disabled = false;
+                document.querySelector('#h'+((num ^ 1))).disabled = false;
+
+                if(num==0){
+
+                    total1=0;
+                    }else{
+                total2=0;
+
+                    }
+
+                
+               
+                return;
+                
+
+            }
+            
+
+            document.getElementById("c"+num).innerHTML=random;
+
+            if(num==0){
+
+                document.getElementById("t"+num).innerHTML=total1;
+            }else{
+                document.getElementById("t"+num).innerHTML=total2;
+
+            }
+            
+
+
+         
+        }, 100);
+      }
+    </script>
+  </body>
+</html>
